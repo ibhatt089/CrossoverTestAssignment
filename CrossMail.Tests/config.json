@@ -1,0 +1,24 @@
+{
+  // Gmail User Name
+  "username": "usercrossover0",
+
+  // Gmail Login Password
+  "password": "usercrossover123",
+
+  // Page Load Timeout in Seconds
+  "_pageLoadTimeout": "60",
+
+  // Implicit Wait Time Span in Seconds
+  "_implicitWaitTimeSpan": "15",
+
+  // Web Element Object Properties
+  "_objectUserNameTextBox": "identifierId",
+  "_objectUserNameNextButton": "identifierNext",
+  "_objectPasswordTextBox": "password",
+  "_objectUserPasswordNextButton": "passwordNext",
+  "_objectComposeButton": "//*[@role='button' and (.)='Compose']",
+  "_objectToTextBox": "to",
+  "_objectSendMailButton": "//*[@role='button' and text()='Send']",
+  "_objectMessageSentLink": "#link_vsm.ag.a8k",
+  "_objectVerifyMailSenderText": "span.qu > span"
+}
