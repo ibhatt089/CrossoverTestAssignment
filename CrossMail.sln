@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2002
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossMail.Tests", "CrossMail.Tests\CrossMail.Tests.csproj", "{B4562B96-3153-4DB9-A075-61627520DED7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossMail.Tests", "CrossMail.Tests\CrossMail.Tests.csproj", "{B4562B96-3153-4DB9-A075-61627520DED7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossoverHelper", "CrossoverHelper\CrossoverHelper.csproj", "{79283BA0-291C-4575-80AA-8B2B51B89B5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{B4562B96-3153-4DB9-A075-61627520DED7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4562B96-3153-4DB9-A075-61627520DED7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4562B96-3153-4DB9-A075-61627520DED7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79283BA0-291C-4575-80AA-8B2B51B89B5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79283BA0-291C-4575-80AA-8B2B51B89B5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79283BA0-291C-4575-80AA-8B2B51B89B5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79283BA0-291C-4575-80AA-8B2B51B89B5C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
