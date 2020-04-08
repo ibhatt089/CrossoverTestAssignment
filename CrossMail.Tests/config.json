@@ -11,14 +11,52 @@
   // Implicit Wait Time Span in Seconds
   "_implicitWaitTimeSpan": "15",
 
+  // Attchment File Path
+  "_filePath": "C:\\Users\\ibhat\\Downloads\\TestFileAttachment.txt",
+
   // Web Element Object Properties
+  // Id
   "_objectUserNameTextBox": "identifierId",
+
+  // Id
   "_objectUserNameNextButton": "identifierNext",
+
+  // Name
   "_objectPasswordTextBox": "password",
+
+  // Id
   "_objectUserPasswordNextButton": "passwordNext",
+
+  // XPath
   "_objectComposeButton": "//*[@role='button' and (.)='Compose']",
+
+  // Name
   "_objectToTextBox": "to",
+
+  // Name
+  "objectSubjectTextBox": "subjectbox",
+
+  // XPath
+  "objectMailBodyTextBox": "//div[@aria-label='Message Body']",
+
+  // XPath
+  "objectMoreOptionsButton": "//div[@aria-label='More options']",
+
+  // XPath
+  "objectLabelMenuItem": "//*[@role='menuitem' and @aria-haspopup='true']",
+
+  // XPath
+  "objectSocialLabelMenuItem": "//*[@title='Social']",
+
+  // XPath
+  "objectAttachFilesButton": "//*[@command='Files']",
+
+  // XPath
   "_objectSendMailButton": "//*[@role='button' and text()='Send']",
+
+  // CssSelector
   "_objectMessageSentLink": "#link_vsm.ag.a8k",
+
+  // CssSelector
   "_objectVerifyMailSenderText": "span.qu > span"
 }
