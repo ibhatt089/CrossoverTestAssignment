@@ -7,13 +7,13 @@ using Xunit;
 
 namespace CrossMail.Tests
 {
-    public class GMailTests : IDisposable
+    public class GmailTests : IDisposable
     {
         readonly IWebDriver _browserDriver;
         readonly IConfiguration _config;
-        
-        public GMailTests()
-        { 
+
+        public GmailTests()
+        {
             _browserDriver = new ChromeDriver("./");
             _config = new ConfigurationBuilder()
                 .AddJsonFile("config.json")
@@ -29,7 +29,7 @@ namespace CrossMail.Tests
 
         [Fact]
         public void Should_Send_Email()
-        {          
+        {
             // Navigate and launch the Gmail URL
             _browserDriver.Navigate().GoToUrl("https://mail.google.com/");
             _browserDriver.Manage().Window.Maximize();
