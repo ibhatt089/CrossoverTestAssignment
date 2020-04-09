@@ -11,8 +11,11 @@
   // Implicit Wait Time Span in Seconds
   "_implicitWaitTimeSpan": "15",
 
-  // Attchment File Path
+  // Attachment File Path
   "_filePath": "C:\\Users\\ibhat\\Downloads\\TestFileAttachment.txt",
+
+  // Attachment File Path
+  "_attachmentFileName": "TestFileAttachment.txt",
 
   // Web Element Object Properties
   // Id
@@ -58,5 +61,14 @@
   "_objectMessageSentLink": "#link_vsm.ag.a8k",
 
   // CssSelector
-  "_objectVerifyMailSenderText": "span.qu > span"
+  "_objectVerifyMailSenderText": "span.qu > span",
+
+  // XPath
+  "_objectSocialInboxElement": "//div[@aria-label='Social']",
+
+  // XPath
+  "_objectMailItem": "//td/div[2]/span/span[@name='me']",
+
+  // XPath
+  "_objectSocialLabelIcon": "//*[@name='^smartlabel_social']"
 }

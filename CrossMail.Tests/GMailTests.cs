@@ -3,7 +3,7 @@ using AutoItX3Lib;
 using Microsoft.Extensions.Configuration;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using CrossoverHelper;
+using CrossMail.Tests.CrossoverHelper;
 using Xunit;
 
 namespace CrossMail.Tests
@@ -13,23 +13,41 @@ namespace CrossMail.Tests
     /// </summary>
     public class GmailTests : IDisposable
     {
+        /// <summary>
+        /// IWebDriver Declaration
+        /// </summary>
         readonly IWebDriver _browserDriver;
+
+        /// <summary>
+        /// IConfiguration Declaration
+        /// </summary>
         readonly IConfiguration _config;
+
+        /// <summary>
+        /// TestReporting Class Local Object for this Test Class
+        /// </summary>
         protected TestReporting testReporting;
-        string testStatus = "fail";
 
         /// <summary>
         /// Constructor Method for Pre-Test Initialize Steps
         /// </summary>
         public GmailTests()
         {
+            // Initializing TestReporting Class Object
+            testReporting = new TestReporting();
+
+            // TestReporting Test Created
+            testReporting.CreateTest("ShouldSendEmail");
+
             _browserDriver = new ChromeDriver("./");
+            testReporting.SetStepStatusPass("Chrome Driver started.");
 
             _config = new ConfigurationBuilder()
                 .AddJsonFile("config.json")
                 .Build();
             _browserDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(Convert.ToInt32(_config["_pageLoadTimeout"]));
             _browserDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(Convert.ToInt32(_config["_implicitWaitTimeSpan"]));
+            testReporting.SetStepStatusPass("Json Config File Loaded Successfully.");
         }
 
         /// <summary>
@@ -37,26 +55,15 @@ namespace CrossMail.Tests
         /// </summary>
         public void Dispose()
         {
-            switch (testStatus)
-            {
-                case "pass":
+            // Reporting Test Case Result Status
+            if(!SeleniumKeywordActions.FailedErrorStep)
                     testReporting.SetTestStatusPass();
-                    break;
-
-                case "fail":
+            else
                     testReporting.SetTestStatusFail("Test Case Failed.");
-                    break;
 
-            }
-
-            try
-            {
-                _browserDriver.Quit();
-                testReporting.Close();
-            }
-            catch (Exception e)
-            {
-            }
+            // Closing IWebDriver and Extent Test Report Object.
+            _browserDriver.Quit();
+            testReporting.Close();
         }
 
         /// <summary>
@@ -65,14 +72,6 @@ namespace CrossMail.Tests
         [Fact]
         public void ShouldSendEmail()
         {
-            testReporting = new TestReporting();
-            
-            testReporting.CreateTest("ShouldSendEmail");
-
-            testReporting.SetStepStatusPass("Chrome Driver started.");
-
-            testReporting.SetStepStatusPass("Json Config File Loaded Successfully.");
-
             // Navigate and launch the Gmail URL
             _browserDriver.LaunchUrl(testReporting, "https://mail.google.com/");
             _browserDriver.Manage().Window.Maximize();
@@ -139,8 +138,30 @@ namespace CrossMail.Tests
             // Click on the Send Mail Button
             IWebElement sendButtonElement = _browserDriver.FindElement(By.XPath(_config["_objectSendMailButton"]));
             sendButtonElement.Click(testReporting, "Send Mail Button");
-            testStatus = "pass";
-            testReporting.Close();
+
+            // Validate and Click on the Message Sent Link Text
+            IWebElement _messageSentLink = _browserDriver.FindElement(By.CssSelector(_config["_objectMessageSentLink"]));
+            SeleniumKeywordActions.VerifyText(testReporting, _messageSentLink.Text, "View message", "'View message' Link");
+            testReporting.SetStepStatusPass("Email Sent Successfully");
+
+            System.Threading.Thread.Sleep(2000);
+
+            // Click on the Social Label Inbox Tab
+            IWebElement socialLabelInboxTab = _browserDriver.FindElement(By.XPath(_config["_objectSocialInboxElement"]));
+            socialLabelInboxTab.Click(testReporting, "Social Label Inbox Tab");
+
+            // Click on the Recieved Mail Row
+            IWebElement mailElement = _browserDriver.FindElement(By.XPath(_config["_objectMailItem"]));
+            mailElement.Click(testReporting, "Recieved Mail Row Element");
+
+            System.Threading.Thread.Sleep(2000);
+
+            // Test Case Validation Method Calls to Verify Sent Email's Label, Subject Line, Mail Body Text ad Attachment File Name.
+            ProjectSpecificValidationHelper.ValidateSocialLabelElement(_browserDriver, testReporting);
+            ProjectSpecificValidationHelper.ValidateSubjectLineTextElement(_browserDriver, testReporting, subjectLineText);
+            ProjectSpecificValidationHelper.ValidateMailBodyTextElement(_browserDriver, testReporting, mailBodyText);
+            ProjectSpecificValidationHelper.ValidateAttachmentNameTextElement(_browserDriver, testReporting, _config["_attachmentFileName"]);
+            
         }
 
         /// <summary>
